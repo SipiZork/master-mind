@@ -164,7 +164,7 @@ function App() {
       <Menu showMenu={showMenu} />
       <h1>Színözön</h1>
       <Table colors={colors} tips={tips} colorsVisible={colorsVisible} voteTip={voteTip} newGame={newGame} setNewGame={setNewGame} simple={simple} />
-      <button className="start-btn" onClick={startGame}>Új jéték</button>
+      <button className="start-btn" onClick={startGame}>Új játék</button>
     </Body>
   )
 }
