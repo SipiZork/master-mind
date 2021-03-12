@@ -125,7 +125,7 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(colors);
+    //console.log(colors);
   }, [colors]);
 
   useEffect(() => {
