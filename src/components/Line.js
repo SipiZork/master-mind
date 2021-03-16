@@ -8,6 +8,7 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 const Line = ({ tip, voteTip, colorsVisible, newGame, setNewGame, simple }) => {
   
   const [voteable, setVoteable] = useState(false);
+  const [mobileView, setMobileView] = useState(false);
   const [colorPickerPos, setColorPickerPos] = useState({
     x: 0,
     y: 0
@@ -38,7 +39,31 @@ const Line = ({ tip, voteTip, colorsVisible, newGame, setNewGame, simple }) => {
       setDefault();
       setNewGame(false);
     }
-  }, [newGame])
+    if (window.innerWidth < 501) {
+      changeMobileView(true);
+    }
+    /*window.addEventListener('resize', () => {
+      if (window.innerWidth < 501) {
+        if (!mobileView) {
+          changeMobileView(true);
+        }
+      } else {
+        changeMobileView(false);
+      }
+    });*/
+  }, [newGame]);
+
+  const changeMobileView = (view) => {
+    if (view && !mobileView) {
+      console.log('change to true');
+      setMobileView(true);
+    }
+    if (!view && mobileView) {
+      console.log('change to false');
+      setMobileView(false);
+    }
+    console.log(mobileView);
+  }
 
   useEffect(() => {
     const { color1, color2, color3, color4 } = lineColors;
@@ -148,7 +173,7 @@ const Line = ({ tip, voteTip, colorsVisible, newGame, setNewGame, simple }) => {
         </div>
         {lineColors.visible &&
           <div className="picker" style={{ left: colorPickerPos.x, top: colorPickerPos.y }}>
-            <GithubPicker width='163px' onChangeComplete={closeColorPicker} color={lineColors.color1} colors={[convertColors(1), convertColors(2), convertColors(3), convertColors(4), convertColors(5), convertColors(6)]} />
+            <GithubPicker className="ghpicker" width='163' onChangeComplete={closeColorPicker} color={lineColors.color1} colors={[convertColors(1), convertColors(2), convertColors(3), convertColors(4), convertColors(5), convertColors(6)]} />
           </div>
         }
         {tip.active && !colorsVisible &&
@@ -158,7 +183,7 @@ const Line = ({ tip, voteTip, colorsVisible, newGame, setNewGame, simple }) => {
             </button>
           </div>
         }
-      </div >
+      </div>
     )
   }
 
@@ -234,6 +259,33 @@ const Right = styled.div`
       position: absolute;
       top:0;
       z-index: 10;
+      @media screen and (max-width: 500px) {
+        position: fixed;
+        top: auto !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        height: 5rem;
+        width: 100%;
+      }
+      .ghpicker {
+        width: 163px;
+        @media screen and (max-width: 500px) {
+          width: 100%;
+          height: 100%;
+          justify-content: center;
+          gap: .25rem;
+
+        span {
+            width: calc(100% / 6 - 10px);
+            height: 100%;
+
+            div {
+              width: 100% !important;
+              height: 100% !important;
+            }
+          }
+        }
+      }
     }
 
     .send {
@@ -242,6 +294,14 @@ const Right = styled.div`
       top: 50%;
       transform: translateY(-50%);
       width: 2.2rem;
+      @media screen and (max-width: 500px) {
+        position: fixed;
+        top: auto !important;
+        bottom: 0 !important;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        right: 0 !important
+      }
       
       button {
         background: transparent;
@@ -249,6 +309,9 @@ const Right = styled.div`
         border: none;
         font-size: 2rem;
         color: rgba(0,255,0,.7);
+        @media screen and (max-width: 500px) {
+          font-size: 3rem;
+        }
       }
     }
   }

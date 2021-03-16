@@ -154,17 +154,17 @@ function App() {
       <GlobalStyle />
       <label className="simple-mode">
         Egyszerűsített verzió{` `}
-        <input type="checkbox" checked={simple} onClick={() => setSimple(!simple)} />
+        <input type="checkbox" checked={simple} onChange={() => setSimple(!simple)} />
       </label>
       <Hamburger className={showMenu ? 'open' : 'close'} onClick={() => setShowMenu(!showMenu)}>
         <div className="line"></div>
         <div className="line"></div>
         <div className="line"></div>
       </Hamburger>
-      <Menu showMenu={showMenu} />
-      <h1>Színözön</h1>
+      <Menu showMenu={showMenu} startGame={startGame} />
+      <h1 className="x-hidden">Színözön</h1>
       <Table colors={colors} tips={tips} colorsVisible={colorsVisible} voteTip={voteTip} newGame={newGame} setNewGame={setNewGame} simple={simple} />
-      <button className="start-btn" onClick={startGame}>Új játék</button>
+      <button className="start-btn x-hidden" onClick={startGame}>Új játék</button>
     </Body>
   )
 }
@@ -181,6 +181,26 @@ const Body = styled.div`
   overflow-y: auto;
   width: 100%;
   min-width: 500px;
+
+  @media screen and (max-width: 500px) {
+    min-width: 300px;
+  }
+  @media screen and (max-width: 350px) {
+    min-width: 250px;
+  }
+
+  .x-hidden {
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
+  }
+
+  .x-show {
+    display: none;
+    @media screen and (max-width: 500px) {
+      display: block;
+    }
+  }
 
   .simple-mode {
     position: absolute;

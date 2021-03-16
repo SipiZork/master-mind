@@ -19,9 +19,19 @@ const Board = styled.div`
   background: rgb(153, 153, 153);
   max-width: 300px;
   min-width: 250px;
+  min-height: 500px;
   height: 45rem;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 500px) {
+    margin-top: 2rem;
+    max-width: none;
+    width: 70%;
+    height: 85%;
+  }
+  @media screen and (max-width: 350px) {
+    width: 100%;
+  }
 
 `;
 

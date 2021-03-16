@@ -4,10 +4,12 @@ import simpleRuleImg from '../assets/images/rules.png';
 import mainRules from '../assets/images/mainrules.png';
 import mainRulesExplation from '../assets/images/mainrules-explanation.png';
 
-const Menu = ({ showMenu }) => {
+const Menu = ({ showMenu, startGame }) => {
   return (
     <StyledMenu className={showMenu ? 'open' : 'close'}>
       <div className="top-hide"></div>
+        <button className="start-btn x-show" onClick={startGame}>Új játék</button>
+      <h1 className="x-show">Színözön</h1>
       <h2>Szabályok</h2>
       <p>
         A játék kezdetekor a játék kiválaszt 6 szinből 4 véletlenszerű színt és véletlenszerű sorrendben elrejti a lefelső sorban. <br />
@@ -62,6 +64,33 @@ const StyledMenu = styled.div`
   padding: 0 1.5rem 1.5rem;
   overflow-y:scroll;
   overflow-x: hidden;
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
+
+  .start-btn {
+    margin: .5rem auto 1rem;
+    padding: .5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1rem;
+    background: transparent;
+    border: none;
+    box-shadow: 0 0 2px 1px black;
+    outline: none;
+    transition: .25s all;
+    &:hover {
+      box-shadow: 0 2px 4px 2px black;
+      background: #00afe0;
+    }
+    cursor: pointer;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
 
   h2 {
     text-align: center;
